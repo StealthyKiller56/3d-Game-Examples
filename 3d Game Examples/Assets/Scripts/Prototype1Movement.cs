@@ -5,7 +5,7 @@ using UnityEngine;
 public class Prototype1Movement : MonoBehaviour
 {
 
-     public float Speed = 5f;
+    public float Speed = 5f;
     public float RotationSpeed = 45f;
 
     private float _horizontalInput;
