@@ -6,11 +6,13 @@ public class RollerBall : MonoBehaviour
 {
 
     public float Speed = 15f;
-
     private float _horizontalInput;
     private float _verticalInput;
     private Rigidbody _playerRigidbody;
     private Vector3 _startingPosition;
+    private Vector3 _checkpointPosition;
+    private bool _isAtCheckpoint = false;
+    public int score = 0;
 
     public float jumpForce;
     public float gravityModifier;
@@ -40,6 +42,11 @@ public class RollerBall : MonoBehaviour
 
         if (transform.position.y < OutOfBounds)
         {
+            if(_isAtCheckpoint)
+            {
+               transform.position = _checkpointPosition;
+            }
+            else
             transform.position = _startingPosition;
         }
     }
@@ -63,7 +70,12 @@ public class RollerBall : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Checkpoint"))
         {
-            _startingPosition = other.gameObject.transform.position;
+            _isAtCheckpoint = true;
+            _checkpointPosition = other.gameObject.transform.position;
+        }
+        if (other.gameObject.CompareTag("End Point"))
+        {
+             transform.position = _startingPosition;
         }
     }
 }
